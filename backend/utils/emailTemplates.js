@@ -19,7 +19,7 @@ ${otpCode}
 </footer>
 </div>`;
 }
-export function generateForgotPasswordEmailTemplate(name, resetPasswordUrl) {
+export function generateforgotPasswordEmailTemplate(name, resetPasswordUrl) {
     return `
     <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; border: 1px solid #1a1a1a; border-radius: 12px; background-color: #000; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         <h2 style="color: #fff; text-align: center; font-size: 26px; margin-bottom: 25px;">Reset Your Password</h2>

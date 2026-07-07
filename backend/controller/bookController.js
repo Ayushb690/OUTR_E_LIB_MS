@@ -5,18 +5,22 @@ import ErrorHandler from "../middlewares/errorMiddlewares.js";
 // import express from "express";
 
 export const addBook = catchAsyncErrors(async (req, res, next) => {
-    const { title, author, description, price, quantity, availability } = req.body;
-    if (!title || !author || !description || !price || !quantity) {
-        return next(new ErrorHandler("please fill all the Fields.", 400));
+    const { title, author, description, price, quantity, availability, isbn } = req.body;
+
+    if (!title || !author || !description || !price || !quantity || !isbn) {
+        return next(new ErrorHandler("Please fill all the Fields, including ISBN.", 400));
     }
+
     const book = await Book.create({
         title,
         author,
         description,
         price,
         quantity,
-        availability: true,
+        availability, 
+        isbn,         // Now correctly passed to the database
     });
+
     res.status(201).json({
         success: true,
         message: "Book Added Successfully.",

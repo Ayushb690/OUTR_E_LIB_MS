@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { sendVerificationCode } from "../utils/sendVerificationCode.js";
 import { sendToken } from "../utils/sendToken.js";
-import { generateForgotPasswordEmailTemplate } from "../utils/emailTemplates.js";
+import { generateforgotPasswordEmailTemplate } from "../utils/emailTemplates.js";
 import { sendEmail } from "../utils/sendEmail.js";
 
 export const register = catchAsyncErrors(async (req, res, next) => {
@@ -164,7 +164,7 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
     const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
     console.log("USER 👉", user);
-    const message = generateForgotPasswordEmailTemplate(user.name, resetPasswordUrl);
+    const message = generateforgotPasswordEmailTemplate(user.name, resetPasswordUrl);
 
     try {
         await sendEmail({
