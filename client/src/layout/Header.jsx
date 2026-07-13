@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import settingIcon from " .. /assets/setting.png";
-import userIcon from " .. /assets/user.png";
+import settingIcon from "../assets/setting.png";
+import userIcon from "../assets/user.png";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSettingPopup } from "../store/slices/popUpSlice";
-
 const Header = () => {
 
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ const Header = () => {
 
   }, []);
 
-  return <>
+  return (<>
     <header className="absolute top-0 bg-white w-full py-4
 px-6 left-0 shadow-md flex justify-between
 items-center">
@@ -57,7 +56,7 @@ items-center">
           <img src={settingIcon} 
           alt="settingIcon" 
           className="w-8 h-8" 
-          onClick={()=>toggleSettingPopup()}/>
+          onClick={()=>dispatch(toggleSettingPopup())}/>
         </span>
       </div>
     </header>
@@ -65,7 +64,8 @@ items-center">
     I
 
 
-  </>;
+  </>
+  );
 };
 
 export default Header;
