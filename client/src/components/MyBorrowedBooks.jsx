@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BookA } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleReadBookPopup } from "../store/slices/popUpSlice";
+import Header from "../layout/Header";
 
 const MyBorrowedBooks = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const MyBorrowedBooks = () => {
   return (
     <>
       <main className="relative flex p-6 pt-28">
-        <Header />
+        <Header/>
         <header className="flex flex-col gap-3 md:flex-row md:justify-between md:items-center">
           <h2 className="text-xl font-medium md:text-2x1 md:font-semibold">
             Borrowed Books

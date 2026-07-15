@@ -11,6 +11,7 @@ import addBookPopup from "../popups/AddBookPopup";
 import ReadBookPopup from "../popups/ReadBookPopup";
 import RecordBookPopup from "../popups/RecordBookPopup";
 import AddBookPopup from "../popups/AddBookPopup";
+import Header from "../layout/Header";
 
 const BookManagement = () => {
 
@@ -61,9 +62,9 @@ const BookManagement = () => {
   const handleSearch = (e) => {
     setSearchedKeyword(e.target.value.toLowerCase());
   };
-  const searchedBooks = books.filter((book) => {
-    return book.title.toLowerCase().includes(searchedKeyword);
-  });
+  const searchedBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(searchedKeyword)
+  );
 
 
   return (

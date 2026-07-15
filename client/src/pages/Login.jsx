@@ -80,15 +80,15 @@ const Login = () => {
               />
             </div>
             <Link to="/password/forgot" className="font-semibold text-black mb-12">
-  Forgot Password?
-</Link>
+              Forgot Password?
+            </Link>
 
-<button
-  type="submit"
-  className="border-2 mt-5 border-gray-400 w-full font-semibold bg-slate-500 text-white py-2 rounded-lg hover:bg-white hover:text-slate-500 transition"
->
-  VERIFY
-</button>
+            <button
+              type="submit"
+              className="border-2 mt-5 border-gray-400 w-full font-semibold bg-slate-500 text-white py-2 rounded-lg hover:bg-white hover:text-slate-500 transition"
+            >
+              VERIFY
+            </button>
           </form>
         </div>
 
@@ -104,8 +104,9 @@ const Login = () => {
           <Link to={"/register"} className="border-2 mt-5
                    border-white px-8 w-full font-semibold
                     bg-white text-slate-500
-                    py-2 rounded-lg hover:bg-white
-                    hover:text-white transition hover:bg-slate-500">SIGN UP</Link>
+                    py-2 rounded-lg
+                    hover:text-white transition hover:bg-slate-500">SIGN UP
+          </Link>
         </div>
       </div>
     </div>
