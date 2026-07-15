@@ -2,32 +2,47 @@ import { User } from "../models/userModel.js";
 
 export function generateVerificationOtpEmailTemplate(otpCode) {
     return ` <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #000; color:#fff;">
-<h2 style="color: #fff; text-align: center;">Verify Your Email Address</h2>
-<p style="font-size: 16px; color: #ccc;">Dear User, </p>
-<p style="font-size: 16px; color: #ccc;">To complete your registration or login, please use the following verification code :< /p>
+<h2 style="color: #fff; text-align: center;">
+Verify Your Email Address
+</h2>
+<p style="font-size: 16px; color: #ccc;">Dear User,
+ </p>
+<p style="font-size: 16px; color: #ccc;">
+To complete your registration or login, please use the following verification code :
+</p>
 <div style="text-align: center; margin: 20px 0;">
 <span style="display: inline-block; font-size: 24px; font-weight: bold; color: #000; padding: 10px 20px; border: 1px solid #fff; border-radius: 5px; background-color:#fff;">
-
 ${otpCode}
 </span>
 </div>
-<p style="font-size: 16px; color: #ccc;">This code is valid for 15 minutes. Please do not share this code with anyone .< /p>
-<p style="font-size: 16px; color: #ccc;">If you did not request this email, please ignore it .< /p>
+<p style="font-size: 16px; color: #ccc;">
+This code is valid for 15 minutes. Please do not share this code with anyone.</p>
+<p style="font-size: 16px; color: #ccc;">
+If you did not request this email, please ignore it.</p>
 <footer style="margin-top: 20px; text-align: center; font-size: 14px; color: #666;">
-<p>Thank you, <br>OUTR Library System .</p>
-<p style="font-size: 12px; color: #444;">This is an automated message. Please do not reply to this email .< /p>
+<p>Thank you,
+ <br>OUTR Library System .
+ </p>
+<p style="font-size: 12px; color: #444;">
+This is an automated message. Please do not reply to this email .
+</p>
 </footer>
-</div>`;
+</div>`
+        ;
 }
-export function generateforgotPasswordEmailTemplate(name, resetPasswordUrl) {
+export function generateForgotPasswordEmailTemplate(name, resetPasswordUrl) {
     return `
-    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; border: 1px solid #1a1a1a; border-radius: 12px; background-color: #000; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-        <h2 style="color: #fff; text-align: center; font-size: 26px; margin-bottom: 25px;">Reset Your Password</h2>
+    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin:0 auto; padding:30px; border:1px solid #1a1a1a; border-radius:12px; background-color:#000; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+        <h2 style="color: #fff; text-align:center; font-size:26px; margin-bottom:25px;">
+        Reset Your Password
+        </h2>
         
-        <p style="font-size: 16px; color: #ccc;">Dear ${name},</p>
+        <p style="font-size: 16px; color: #ccc;">
+        Dear ${name},
+        </p>
         
         <p style="font-size: 16px; color: #ccc; line-height: 1.6;">
-            We received a request to reset your password for your <strong>OUTR Library System</strong> account. Please click the button below to choose a new one:
+            We received a request to reset your password for your <b>OUTR Library System</b> account. Please click the button below to choose a new one:
         </p>
 
         <div style="text-align: center; margin: 35px 0;">
@@ -50,7 +65,7 @@ export function generateforgotPasswordEmailTemplate(name, resetPasswordUrl) {
         </p>
 
         <footer style="margin-top: 40px; text-align: center; border-top: 1px solid #222; padding-top: 20px;">
-            <p style="font-size: 14px; color: #666; margin-bottom: 4px;">Thank you, <br><strong>OUTR Library System Team</strong></p>
+            <p style="font-size: 14px; color: #666; margin-bottom: 4px;">Thank you, <br><b>OUTR Library System Team</b></p>
             <p style="font-size: 11px; color: #444; letter-spacing: 1px;">&copy; 2026 OUTR Library System INC. ALL RIGHTS RESERVED.</p>
         </footer>
     </div>`;

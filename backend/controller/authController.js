@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { sendVerificationCode } from "../utils/sendVerificationCode.js";
 import { sendToken } from "../utils/sendToken.js";
-import { generateforgotPasswordEmailTemplate } from "../utils/emailTemplates.js";
+import { generateForgotPasswordEmailTemplate } from "../utils/emailTemplates.js";
 import { sendEmail } from "../utils/sendEmail.js";
 
 export const register = catchAsyncErrors(async (req, res, next) => {
@@ -103,21 +103,26 @@ export const verifyOTP = catchAsyncErrors(async (req, res, next) => {
 
 });
 export const login = catchAsyncErrors(async (req, res, next) => {
+    console.log("BODY:",req.body);
     const { email, password } = req.body;
-    const normalizedEmail = email.toLowerCase();
-    console.log("LOGIN EMAIL 👉", email);
-    console.log("NORMALIZED 👉", normalizedEmail);
+    console.log("EMAIL 👉", email);
+    console.log("password 👉", password);
 
     if (!email || !password) {
-        return next(new ErrorHandler("Please Enter all Fiels", 400));
+        return next(new ErrorHandler("Please enter all fields.", 400));
     }
-    const user = await User.findOne({ email, accountVerified: true }).select("+password");
-    console.log("USER FOUND 👉", user);   // 👈 ADD HERE
+    const normalizedEmail = email.toLowerCase().trim();
+    console.log("searching 👉", normalizedEmail);
+    const user = await User.findOne({
+        email: normalizedEmail,
+        accountVerified: true
+    }).select("+password");
+    console.log("USER FOUND 👉", user);
 
     if (!user) {
         return next(new ErrorHandler("Invalid Email or password.", 400));
     }
-    console.log("ENTERED PASSWORD 👉", password);       // 👈 ADD HERE
+    console.log("ENTERED PASSWORD 👉", password);       
     console.log("DB PASSWORD 👉", user.password);
 
     const isPasswordMatched = await bcrypt.compare(password, user.password);
