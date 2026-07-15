@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { recordBorrowBook } from " .. /store/slices/borrowSlice";
+import { recordBorrowBook } from "../store/slices/borrowSlice";
 import { toggleRecordBookPopup } from "../store/slices/popUpSlice";
 
 const RecordBookPopup = ({ bookId }) => {
@@ -8,7 +8,7 @@ const RecordBookPopup = ({ bookId }) => {
   const [email, setEmail] = useState("");
   const handleRecordBook = (e) => {
     e.preventDefault();
-    dispatch(recordBorrowBook(email, bookId))
+dispatch(recordBorrowBook(email, bookId));
   };
 
 
@@ -50,9 +50,5 @@ const RecordBookPopup = ({ bookId }) => {
     </>
   );
 };
-
-export default RecordBookPopup;
-
-
 
 export default RecordBookPopup;
