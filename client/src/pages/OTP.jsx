@@ -96,7 +96,7 @@ const OTP = () => {
 
         </div>
         {/* right side */}
-        <div className="hidden w-full md:1/2 bg-slate-500 text-white md:flex flex-col items-center justify-center
+        <div className="hidden w-full md:w-1/2 bg-slate-500 text-white md:flex flex-col items-center justify-center
         p-8 rounded-tl-[80px] rounded-bl-[80px]">
           <div className="text-center h-[400px]">
             <div className="flex justify-center mb-12">
@@ -106,7 +106,7 @@ const OTP = () => {
             <Link to={"/register"} className="border-2 mt-5
                    border-white px-8 w-full font-semibold
                     bg-white text-slate-500
-                    py-2 rounded-lg hover:bg-white
+                    py-2 rounded-lg
                     hover:text-white transition hover:bg-slate-500">SIGN UP</Link>
           </div>
         </div>

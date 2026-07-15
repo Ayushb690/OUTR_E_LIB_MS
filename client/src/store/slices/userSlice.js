@@ -34,36 +34,49 @@ const userSlice = createSlice({
         },
     },
 });
-export const fetchAllUsers = () => (dispatch) => {
+export const fetchAllUsers = () => async (dispatch) => {
     dispatch(userSlice.actions.fetchAllUsersRequest());
+
     await axios
-    .get("http://localhost:4000/api/v1/user/all", { withCredentials: true })
-    .then(res => {
-        dispatch(userSlice.actions.fetchAllUsersSuccess(res.data.users))
-    }).catch(
-        err => {
-            dispatch(userSlice.actions.fetchAllUsersFailed(err.response.data.message))
+        .get("http://localhost:4000/api/v1/user/all", {
+            withCredentials: true,
+        })
+        .then((res) => {
+            dispatch(
+                userSlice.actions.fetchAllUsersSuccess(res.data.users)
+            );
+        })
+        .catch((err) => {
+            dispatch(
+                userSlice.actions.fetchAllUsersFailed(
+                    err.response.data.message
+                )
+            );
+        });
+};
 
-        }
-    )
-}
-
-export const addNewAdmin=()=>{ async(dispatch)=>
+export const addNewAdmin = (data) => async (dispatch) => {
     dispatch(userSlice.actions.addNewAdminRequest());
-    await axios.post("http://localhost:4000/api/v1/user/add/new-admin",data,{
-        withCredentials:true,
-        headers:{
-            "Content-Type":"multipart/form-data",
 
-        }
-    }).then(res=>{
-        dispatch(userSlice.actions.addNewAdminSuccess());
-        toast.success(res.data.message);
-        dispatch(toggleAddNewAdminPopup());
-    }).catch(err=>{
-        userSlice.actions.addNewAdminFailed();
-        toast.error(err.response.data.message);
-    })
-
+    await axios
+        .post(
+            "http://localhost:4000/api/v1/user/add/new-admin",
+            data,
+            {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        )
+        .then((res) => {
+            dispatch(userSlice.actions.addNewAdminSuccess());
+            toast.success(res.data.message);
+            dispatch(toggleAddNewAdminPopup());
+        })
+        .catch((err) => {
+            dispatch(userSlice.actions.addNewAdminFailed());
+            toast.error(err.response.data.message);
+        });
 };
 export default userSlice.reducer;

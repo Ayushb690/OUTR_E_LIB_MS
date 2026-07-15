@@ -1,50 +1,75 @@
 import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
-  Routes, Route
+  Routes,
+  Route,
 } from "react-router-dom";
+
 import Home from "./pages/Home";
-import forgotPassword from "./pages/forgotPassword";
 import Login from "./pages/Login";
-import OTP from "./pages/OTP";
 import Register from "./pages/Register";
+import OTP from "./pages/OTP";
+import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+
 import { ToastContainer } from "react-toastify";
+
 import { useDispatch, useSelector } from "react-redux";
+
 import { getUser } from "./store/slices/authSlice";
 import { fetchAllUsers } from "./store/slices/userSlice";
 import { fetchAllBooks } from "./store/slices/bookSlice";
-import { fetchAllBorrowedBooks, fetchUserBorrowedBooks } from "./store/slices/borrowSlice";
-
+import {
+  fetchAllBorrowedBooks,
+  fetchUserBorrowedBooks,
+} from "./store/slices/borrowSlice";
 
 const App = () => {
-  const { user, isAuthenticated } = useSelector(state => state.auth);
-  const dispatch=useDispatch();
-  useEffect(()=>{
+  const { user, isAuthenticated } = useSelector(
+    (state) => state.auth
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
     dispatch(getUser());
     dispatch(fetchAllBooks());
-    if(isAuthenticated && usr?.role==="User"){
+
+    if (isAuthenticated && user?.role === "User") {
       dispatch(fetchUserBorrowedBooks());
     }
-    if(isAuthenticated && usr?.role==="Admin"){
+
+    if (isAuthenticated && user?.role === "Admin") {
       dispatch(fetchAllUsers());
       dispatch(fetchAllBorrowedBooks());
     }
-  },[isAuthenticated])
+  }, [dispatch, isAuthenticated, user]);
 
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/password/forgot"
+            element={<ForgotPassword />}
+          />
+          <Route
+            path="/otp-verification/:email"
+            element={<OTP />}
+          />
+          <Route
+            path="/password/reset/:token"
+            element={<ResetPassword />}
+          />
+        </Routes>
+      </Router>
 
-  return <Router>
-
-    <Routes>
-      <Route path="" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/Register" element={<Register />} />
-      <Route path="/forgotPassword" element={<forgotPassword />} />
-      <Route path="/otp-verification/:email" element={<OTP />} />
-      <Route path="/password/reset/:token" element={<ResetPassword />} />
-    </Routes>
-  </Router>;
-  <ToastContainer theme="dark" />
+      <ToastContainer theme="dark" />
+    </>
+  );
 };
 
 export default App;

@@ -47,17 +47,21 @@ const bookSlice = createSlice({
     },
 });
 
-export const fetchAllBooks = () => (dispatch) => {
+export const fetchAllBooks = () => async (dispatch) => {
     dispatch(bookSlice.actions.fetchBooksRequest());
-    await axios.get("http://localhost:4000/api/v1/book/all", { withCredentials: true }).then(
-        res => {
-            dispatch(bookSlice.actions.fetchBooksSuccess(res.data.books))
-        }).catch(
-            err => {
-                dispatch(bookSlice.actions.fetchBooksFailed(err.response.data.message));
-            }
-        )
 
+    await axios
+        .get("http://localhost:4000/api/v1/book/all", {
+            withCredentials: true,
+        })
+        .then((res) => {
+            dispatch(bookSlice.actions.fetchBooksSuccess(res.data.books));
+        })
+        .catch((err) => {
+            dispatch(
+                bookSlice.actions.fetchBooksFailed(err.response.data.message)
+            );
+        });
 };
 
 export const addBook = (data) => async (dispatch) => {

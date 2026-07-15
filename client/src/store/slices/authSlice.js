@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act, startTransition } from "react";
 
 const authSlice = createSlice({
     name: "auth",
@@ -81,9 +80,9 @@ const authSlice = createSlice({
         },
         resetAuthSlice(state) {
             state.error = null;
-            state.Loading = false;
+            state.loading = false;
             state.message = null;
-            state.user = state.user;
+            // state.user = state.user;
             state.isAuthenticated = state.isAuthenticated
         },
         getUserRequest(state) {
@@ -112,7 +111,7 @@ const authSlice = createSlice({
             state.loading = false
             state.message = action.payload;
         },
-        forgotPasswordFailed(state ,action ) {
+        forgotPasswordFailed(state, action) {
 
             state.loading = false;
             state.error = action.payload;
@@ -142,7 +141,7 @@ const authSlice = createSlice({
             state.loading = false
             state.message = action.payload;
         },
-        updatePasswordFailed(state,action) {
+        updatePasswordFailed(state, action) {
 
             state.loading = false;
             state.error = action.payload;
@@ -188,13 +187,13 @@ export const otpVerification = (email, otp) => async (dispatch) => {
         });
 };
 export const login = (data) => async (dispatch) => {
+    console.log("DATA SENT FROM FRONTEND:", data);
     dispatch(authSlice.actions.loginRequest());
     await axios
         .post("http://localhost:4000/api/v1/auth/login", data, {
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
-
             },
         }).then((res) => {
             dispatch(authSlice.actions.loginSuccess(res.data));

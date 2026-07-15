@@ -40,7 +40,7 @@ const ForgotPassword = () => {
       {/* left section */}
       <div className="hidden w-full md-1/2 bg-slate-500 text-white md:flex flex-col items-center
        justify-center p-8 rounded-tr-[80px] 
-rounded-br-[80px]">
+          rounded-br-[80px]">
         <div className="text-center h-[450px]         ">
           <div className="flex justify-center mb-12">
             <img src={logo_with_title} alt="logo" className="mb-12h-44 w-auto" />
@@ -59,20 +59,23 @@ rounded-br-[80px]">
         </Link>
         <div className="w-full max-w-sm">
           <div className="flex justify-center mb-12">
-            <div className="rounded-full flex items-center justify-center">
+            <div className="flex items-center justify-center">
               <img src={logo} alt="logo" className="h-24 w-auto" />
             </div>
           </div>
           <h1 className="text-4xl font-medium text-center mb-5 overflow-hidden">Forgot Password</h1>
-          <p className="text-gray-800 text-center mb-12">Please enter your Email</p>
-          <form onSubmit={handleForgotPassword}>
+          <p className="text-gray-800 text-center mb-12 font-semibold">
+            Please enter your Email
+          </p>
+          <form onSubmit={handleForgotPassword} >
             <div className="mb-4">
-              <input type="email"
+              <input
+                type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="w-full px-4 py-3 border-black rounded-md focus:outline-none" />
+                className="w-full px-4 py-3 border border-black rounded-md focus:outline-none" />
             </div>
             <button type="submit" className="border-2 mt-5
                    border-gray-400 w-full font-semibold

@@ -4,9 +4,8 @@ import logo_with_title from "../assets/logo-with-title.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { resetAuthSlice } from "../store/slices/authSlice";
-import { Link } from "react-router-dom";
-
+import { login, resetAuthSlice } from "../store/slices/authSlice";
+import { Link, Navigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
@@ -18,22 +17,25 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("email", email)
-    data.append("password", password)
 
-  }
+    const data = {
+      email,
+      password,
+    };
+
+    dispatch(login(data));
+  };
   useEffect(() => {
-    // if (message) {
-    // toast.success(message);
-    // dispatch(resetAuthSlice());
-    // }
+    if (message) {
+      toast.success(message);
+      dispatch(resetAuthSlice());
+    }
 
     if (error) {
       toast.error(error);
       dispatch(resetAuthSlice());
     }
-  }, [dispatch, isAuthenticated, error, loading]);
+  }, [message, error, dispatch]);
 
   if (isAuthenticated) {
     return <Navigate to={"/"} />;
@@ -54,7 +56,8 @@ const Login = () => {
           </div>
 
           <h1 className="text-4xl font-medium text-center mb-12 overflow-hidden text-gray-500">
-            Welcome back!!!            </h1>
+            Welcome back!!!           
+             </h1>
 
           <p className="text-gray-700 text-center mb-12">
             Please enter your credentials to log in
