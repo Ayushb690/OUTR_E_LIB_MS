@@ -75,13 +75,14 @@ const ForgotPassword = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="w-full px-4 py-3 border border-black rounded-md focus:outline-none" />
+                className="w-full px-4 py-3 border rounded-md border-slate-500 hover:border-green-400 hover:outline-4
+                focus:outline-none transition duration-300" />
             </div>
             <button type="submit" className="border-2 mt-5
                    border-gray-400 w-full font-semibold
                     bg-slate-500 text-white
                     py-2 rounded-lg hover:bg-white
-                    hover:text-slate-500 transition"
+                    hover:text-slate-600 transition"
               disabled={loading ? true : false}>
               RESET PASSWORD
             </button>

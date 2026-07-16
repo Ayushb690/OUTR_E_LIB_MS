@@ -69,7 +69,8 @@ const Login = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-slate-500 rounded-md focus:outline-none"
+                className="w-full px-4 py-3 border rounded-md border-slate-500 hover:border-green-400 hover:outline-4
+                focus:outline-none transition duration-300"
                 placeholder="Email"
               />
             </div>
@@ -78,7 +79,8 @@ const Login = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setpassword(e.target.value)}
-                className="w-full px-4 py-3 border border-slate-500 rounded-md focus:outline-none"
+                className="w-full px-4 py-3 border rounded-md border-slate-500 hover:border-red-400 hover:outline-4
+                focus:outline-none transition duration-300"
                 placeholder="Password"
               />
             </div>
@@ -103,7 +105,7 @@ const Login = () => {
           <div className="flex justify-center mb-12">
             <img src={logo_with_title} alt="logo" className="mb-12 h-28 w-auto" />
           </div>
-          <p className="text-gray-300 mb-12">New to Platform?Sign up now.</p>
+          <p className="text-gray-300 mb-12">New to Platform? <strong>Sign up</strong> now.</p>
           <Link to={"/register"} className="border-2 mt-5
                    border-white px-8 w-full font-semibold
                     bg-white text-slate-500
