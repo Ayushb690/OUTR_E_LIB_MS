@@ -8,6 +8,16 @@ import {
 const router = express.Router();
 
 router.get("/all", isAuthenticated, isAuthorized("Admin"), getAllUsers);
-router.post("/add/new-admin", isAuthenticated, isAuthorized("Admin"), registerNewAdmin);
+// Modify the route in userRouter.js to allow bypass if count === 0
+router.post("/add/new-admin", async (req, res, next) => {
+    const adminCount = await User.countDocuments({ role: "Admin" });
+    if (adminCount === 0) {
+        // Bypass auth checks for the very first Admin
+        return next();
+    }
+    // Otherwise, enforce regular checks
+    isAuthenticated(req, res, () => isAuthorized("Admin")(req, res, next));
+}, registerNewAdmin);
+
 
 export default router;
