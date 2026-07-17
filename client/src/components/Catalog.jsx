@@ -72,83 +72,70 @@ const Catalog = () => {
   }, [dispatch, error, loading]);
   return (
     <>
-      <main className="relative flex p-6 pt-28">
-        <Header />
-        {/* sub header */}
-        <header className=" flex flex-col gap-3 sm:flex-row md:items-center">
-          <button className={`relative rounded sm:rounded-tr-none sm:rounded-br-none sm:rounded-tl-lg
-        sm:rounded-bl-lg text-center border-2 font-semibold py-2 w-full sm:w-72 
-        ${filter === "borrowed"
-              ? "bg-slate-500 text-white border-black"
-              : "bg-gray-300 text-black border-gray-200 hover:bg-gray-400"
-            }`}
-            onClick={() => setFilter("borrowed")}
-          >
-            borrowed Books
-          </button>
-          <button className={`relative rounded sm:rounded-tl-none sm:rounded-bl-none sm:rounded-tr-lg
-        sm:rounded-br-lg text-center border-2 font-semibold py-2 w-full sm:w-72 
-        ${filter === "Overdue"
-              ? "bg-slate-500 text-white border-black"
-              : "bg-gray-300 text-black border-gray-200 hover:bg-gray-400"
-            }`}
-            onClick={() => setFilter("Overdue")}
-          >
-            Overdue Borrowers</button>
+      <main className="relative flex flex-col p-6 pt-28 min-h-screen bg-gray-100">
+  <Header />
 
-        </header>
+  {/* Page Title */}
+  <div className="mb-6">
+    <h1 className="text-3xl font-bold text-gray-800">
+      Catalog
+    </h1>
+    <p className="text-gray-500">
+      Manage borrowed and overdue books
+    </p>
+  </div>
 
+  {/* Filter Buttons */}
+  <div className="mb-6 flex flex-wrap gap-3">
+    <button
+      onClick={() => setFilter("borrowed")}
+      className={`px-8 py-3 rounded-lg font-semibold transition-all duration-200
+      ${
+        filter === "borrowed"
+          ? "bg-slate-600 text-white shadow-md"
+          : "bg-white border border-gray-300 hover:bg-gray-100"
+      }`}
+    >
+      Borrowed Books
+    </button>
 
-        {
-          booksToDisplay && booksToDisplay.length > 0 ? (
-            <div className="mt-6 overflow-auto bg-white rounded-md shadow-lg">
-              <table className="min-w-full border-collapse">
-                <thead>
-                  <tr className="bg-gray-200">
-                    <th className="px-4 py-2 text-left">ID</th>
-                    <th className="px-4 py-2 text-left">Username</th>
-                    <th className="px-4 py-2 text-left">Email</th>
-                    <th className="px-4 py-2 text-left">Price</th>
-                    <th className="px-4 py-2 text-left">Due Date</th>
-                    <th className="px-4 py-2 text-left">Date & Time</th>
-                    <th className="px-4 py-2 text-left">Return</th>
-                  </tr>
-                </thead>
+    <button
+      onClick={() => setFilter("Overdue")}
+      className={`px-8 py-3 rounded-lg font-semibold transition-all duration-200
+      ${
+        filter === "Overdue"
+          ? "bg-slate-600 text-white shadow-md"
+          : "bg-white border border-gray-300 hover:bg-gray-100"
+      }`}
+    >
+      Overdue Borrowers
+    </button>
+  </div>
 
-                <tbody>
-                  {booksToDisplay.map((book, index) => (
-                    <tr
-                      key={index}
-                      className={(index + 1) % 2 === 0 ? "bg-gray-50" : ""}
-                    >
-                      <td className="px-4 py-2">{index + 1}</td>
-                      <td className="px-4 py-2">{book?.user.name}</td>
-                      <td className="px-4 py-2">{book?.user.email}</td>
-                      <td className="px-4 py-2">{book.price}</td>
-                      <td className="px-4 py-2">{formatDate(book.dueDate)}</td>
-                      <td className="px-4 py-2">{formatDateAndTime(book.createdAt)}</td>
-                      <td className="px-4 py-2">
-                        {
-                          book.returnDate ? (<FaSquareCheck className="w-6 h-6 " />)
-                            : (
-                              <PiKeyReturnBold onClick={() => openReturnBookPopup(book.book,
-                                book?.user.email
-                              )} className="w-6 h-6" />
-                            )
-                        }
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <h3 className="text-3xl mt-5 font-medium">
-              No {filter === "borrowed" ? "borrowed" : "overdue"}books found !!
-            </h3>
+  {/* Content */}
+  <div className="flex-1">
+    {booksToDisplay.length > 0 ? (
+      <div className="overflow-hidden rounded-xl bg-white shadow-lg">
+        <div className="overflow-x-auto">
+          <table className="min-w-full">
+            ...
+          </table>
+        </div>
+      </div>
+    ) : (
+      <div className="flex h-[55vh] flex-col items-center justify-center rounded-xl bg-white shadow-lg">
 
-          )}
-      </main>
+        <h2 className="text-3xl font-semibold text-gray-700">
+          No {filter === "borrowed" ? "borrowed" : "overdue"} books found
+        </h2>
+
+        <p className="mt-3 text-gray-500">
+          Books will appear here once users borrow them.
+        </p>
+      </div>
+    )}
+  </div>
+</main>
       {
         returnBookPopup &&
         (<ReturnBookPopup bookId={borrowedBookId} email={email} />)

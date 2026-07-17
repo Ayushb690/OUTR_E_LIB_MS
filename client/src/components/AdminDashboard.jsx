@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import adminIcon from "../assets/pointing.png";
 import usersIcon from "../assets/people-black.png";
 import bookIcon from "../assets/book-square.png";
@@ -46,21 +46,38 @@ const AdminDashboard = () => {
   const [totalReturnedBooks, setTotalReturnedBooks] = useState(0);
 
   useEffect(() => {
-    let numberOfUsers = users.filter((user) => user.role === "User");
-    let numberOfAdmins = users.filter((user) => user.role === "Admin");
+    // let numberOfUsers = users.filter((user) => user.role === "User");
+    // let numberOfAdmins = users.filter((user) => user.role === "Admin");
+    let numberOfUsers = (users || []).filter(
+      (user) => user.role === "User"
+    );
+
+    let numberOfAdmins = (users || []).filter(
+      (user) => user.role === "Admin"
+    );
     setTotalUsers(numberOfUsers.length);
     setTotalAdmin(numberOfAdmins.length);
 
-    let numberOfTotalBorrowedBooks = allBorrowedBooks.filter(
+    // let numberOfTotalBorrowedBooks = allBorrowedBooks.filter(
+    //   (book) => book.returnDate === null
+    // );
+    // let numberOfTotalReturnedBooks = allBorrowedBooks.filter(
+    //   (book) => book.returnDate !== null
+    // );
+
+    const borrowed = allBorrowedBooks || [];
+
+    let numberOfTotalBorrowedBooks = borrowed.filter(
       (book) => book.returnDate === null
     );
-    let numberOfTotalReturnedBooks = allBorrowedBooks.filter(
+
+    let numberOfTotalReturnedBooks = borrowed.filter(
       (book) => book.returnDate !== null
     );
+    setTotalBooks((books || []).length);
     setTotalBorrowedBooks(numberOfTotalBorrowedBooks.length);
     setTotalReturnedBooks(numberOfTotalReturnedBooks.length);
-  }, [users, allBorrowedBooks]);
-
+  }, [users, books, allBorrowedBooks]);
   const data = {
     labels: ["Total Borrowed Books", "Total Returned Books"],
     datasets: [
@@ -73,13 +90,13 @@ const AdminDashboard = () => {
   };
 
   return <>
-    <main className="relative flex-1 p-6 pt-28">
+    <main className="relative flex-col flex-1 p-6 pt-28">
       <Header />
       <div className="flex flex-col-reverse x1:flex-row">
         {/* LEFT SIDE */}
         <div className="flex-[2] flex-col gap-7 lg:flex-row flex lg:items-center xl:flex-col justify-between 
         x1:gap-20 py-5">
-          <div className="xl: flex-[4] flex items-end w-full content-center">
+          <div className="xl:flex-[4] flex items-end w-full content-center">
             <Pie
               data={data}
               options={{ cutout: 0 }}
@@ -88,8 +105,8 @@ const AdminDashboard = () => {
           </div>
           <div className="flex items-center p-8 w-full sm:w-[400px] xl:w-fit mr-5 xl:p-3 2xl:p-6 gap-5 h-fit
             xl:min-h-[150px] bg-white xl:flex-1 rounded-lg">
-            <img src={logo} alt="logo" className="w-auto x1:flex-1 rounded-1g" />
-            <span className="w-[2px] Obg-black h-full"></span>
+            <img src={logo} alt="logo" className="w-auto x1:flex-1 rounded-lg" />
+            <span className="w-[2px] bg-black h-full"></span>
             <div className="flex flex-col gap-3" >
               <p className="flex items-center gap-3">
                 <span className="w-3 h-3 rounded-full bg-[#424d4d]"></span>
@@ -104,8 +121,7 @@ const AdminDashboard = () => {
           </div>
         </div>
         {/* RIGHT SIDE */}
-        <div className="flex flex-[4] flex-col gap-7 lg:gap-16 lg:px-7 lg:py-5 justify-between xl:min-h-[85.
-        5vh]">
+        <div className="flex flex-[4] flex-col gap-7 lg:gap-16 lg:px-7 lg:py-5 justify-between xl:min-h-[85.5vh]">
           <div className="flex flex-col-reverse lg:flex-row gap-7 flex-[4]">
             <div className="flex flex-col gap-7 flex-1">
               <div className="flex items-center gap-3 bg-white p-5 max-h-[120px] overflow-y-hidden
@@ -134,8 +150,7 @@ const AdminDashboard = () => {
               <div className="flex items-center gap-3 bg-white p-5 max-h-[120px] overflow-y-hidden
                 rounded-lg transition hover:shadow-inner duration-300 w-full lg:max-w-[360px]">
                 <span className="bg-gray-300 h-20 min-w-20 flex justify-center items-center rounded-lg">
-                  <img src={adminIconIcon} alt="admin-icon" className="w-8 h-8" />
-                </span>
+                  <img src={adminIcon} alt="admin-icon" className="w-8 h-8" />                </span>
                 < span className="w-[2px] bg-black h-20 lg:h-full"></span>
                 <div className="flex flex-col items-center gap-2">
                   <h4 className="font-black text-3xl">{totalAdmin}</h4>

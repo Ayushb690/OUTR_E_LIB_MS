@@ -102,9 +102,13 @@ export const fetchAllBorrowedBooks = () => async (dispatch) => {
                 res.data.borrowedBooks
             )
             );
-        }).catch(err => {
-            dispatch(borrowSlice.actions.fetchUserAllBorrowedBooksFailed(err.response.data.message));
-        });
+        }).catch((err) => {
+            console.log("Borrow API Error:", err);
+            dispatch(
+                borrowSlice.actions.fetchUserAllBorrowedBooksFailed(
+                    err.response?.data?.message || err.message));
+        }
+        );
 };
 
 export const recordBorrowBook = (email, id) => async (dispatch) => {

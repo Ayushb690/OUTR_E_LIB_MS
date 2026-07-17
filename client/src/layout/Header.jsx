@@ -19,7 +19,7 @@ const Header = () => {
       const ampm = now.getHours() >= 12 ? "PM" : "AM";
       setCurrentTime(`${hours}:${minutes}:${ampm}`);
 
-      const options = { month: "short", dat: "numeric", year: "numeric" };
+      const options = { month: "short", day: "numeric", year: "numeric" };
       setCurrentDate(now.toLocaleDateString("en-US", options));
     };
 
@@ -52,17 +52,18 @@ items-center">
           <span>{currentTime}</span>
           <span>{currentDate}</span>
         </div>
-        <span className="bg-slate-600 h-14 w-[2px]">
-          <img src={settingIcon} 
-          alt="settingIcon" 
-          className="w-8 h-8" 
-          onClick={()=>dispatch(toggleSettingPopup())}/>
-        </span>
+        <div className="flex items-center gap-3">
+    <span className="bg-slate-600 h-14 w-[2px]"></span>
+
+    <img
+        src={settingIcon}
+        alt="settingIcon"
+        className="w-8 h-8 cursor-pointer"
+        onClick={() => dispatch(toggleSettingPopup())}
+    />
+</div>
       </div>
     </header>
-
-    I
-
 
   </>
   );

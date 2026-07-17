@@ -30,15 +30,14 @@ const ForgotPassword = () => {
       toast.error(error);
       dispatch(resetAuthSlice());
     }
-  }, [dispatch, isAuthenticated, error, loading]);
-
+  }, [dispatch, message, error]);
   if (isAuthenticated) {
     return <Navigate to={"/"} />;
   }
   return <>
     <div className="flex flex-col justify-center md:flex-row h-screen">
       {/* left section */}
-      <div className="hidden w-full md-1/2 bg-slate-500 text-white md:flex flex-col items-center
+      <div className="hidden w-full md:w-1/2 bg-[#A74C4A] text-white md:flex flex-col items-center
        justify-center p-8 rounded-tr-[80px] 
           rounded-br-[80px]">
         <div className="text-center h-[450px]         ">
@@ -52,8 +51,8 @@ const ForgotPassword = () => {
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-8 relative">
         <Link
           to={"/login"}
-          className="border-2 border-black rounded-3xl font-bold w-52 py-2
-                  px-4 absolute top-10 -left-24  text-gray-500 hover:bg-slate-500 hover:text-white transition duration-300 text-right"
+          className="border-2 border-[#A74C4A] rounded-3xl font-bold w-39 py-2
+                  px-4 absolute top-5 left-4  text-[#A74C4A] hover:bg-[#A74C4A] hover:text-white transition duration-300 text-right"
         >
           Back
         </Link>
@@ -80,7 +79,7 @@ const ForgotPassword = () => {
             </div>
             <button type="submit" className="border-2 mt-5
                    border-gray-400 w-full font-semibold
-                    bg-slate-500 text-white
+                    bg-[#A74C4A] text-white
                     py-2 rounded-lg hover:bg-white
                     hover:text-slate-600 transition"
               disabled={loading ? true : false}>

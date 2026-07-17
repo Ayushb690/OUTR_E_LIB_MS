@@ -83,7 +83,6 @@ const authSlice = createSlice({
             state.loading = false;
             state.message = null;
             // state.user = state.user;
-            state.isAuthenticated = state.isAuthenticated
         },
         getUserRequest(state) {
             state.loading = true;
@@ -109,7 +108,7 @@ const authSlice = createSlice({
         },
         forgotPasswordSuccess(state, action) {
             state.loading = false
-            state.message = action.payload;
+            state.message = action.payload.message;
         },
         forgotPasswordFailed(state, action) {
 
