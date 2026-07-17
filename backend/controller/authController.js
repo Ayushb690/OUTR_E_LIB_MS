@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { sendVerificationCode } from "../utils/sendVerificationCode.js";
 import { sendToken } from "../utils/sendToken.js";
-import {generateForgotPasswordEmailTemplate } from "../utils/emailTemplates.js"
+import { generateForgotPasswordEmailTemplate } from "../utils/emailTemplates.js"
 import { sendEmail } from "../utils/sendEmail.js";
 
 export const register = catchAsyncErrors(async (req, res, next) => {
@@ -103,7 +103,7 @@ export const verifyOTP = catchAsyncErrors(async (req, res, next) => {
 
 });
 export const login = catchAsyncErrors(async (req, res, next) => {
-    console.log("BODY:",req.body);
+    console.log("BODY:", req.body);
     const { email, password } = req.body;
     console.log("EMAIL 👉", email);
     console.log("password 👉", password);
@@ -122,7 +122,7 @@ export const login = catchAsyncErrors(async (req, res, next) => {
     if (!user) {
         return next(new ErrorHandler("Invalid Email or password.", 400));
     }
-    console.log("ENTERED PASSWORD 👉", password);       
+    console.log("ENTERED PASSWORD 👉", password);
     console.log("DB PASSWORD 👉", user.password);
 
     const isPasswordMatched = await bcrypt.compare(password, user.password);
@@ -155,6 +155,8 @@ export const getUser = catchAsyncErrors(async (req, res, next) => {
     });
 });
 export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
+    console.log("Forgot Password API Called");
+    // console.log(req.body);
     if (!req.body.email) {
         return next(new ErrorHandler("Email is required.", 400));
     }
@@ -165,10 +167,11 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     if (!user) {
         return next(new ErrorHandler("Invalid Email", 400));
     }
+    // console.log("User found:", user);
     const resetToken = user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });
+    // console.log("About to send email...");
     const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
-    console.log("USER 👉", user);
     const message = generateForgotPasswordEmailTemplate(user.name, resetPasswordUrl);
 
     try {
@@ -177,15 +180,17 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
             subject: "Library Management System Password Recovery",
             message,
         });
+        // console.log("Email sent successfully");
         res.status(200).json({
             success: true,
-            message: ` Email sent to ${user.email} successfully.`,
+            message: `Email sent to ${user.email} successfully.`,
         });
     } catch (error) {
+         console.log(error);
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
         await user.save({ validateBeforeSave: false });
-        return next(new ErrorHandler(error.message, 500));
+        return next(new ErrorHandler(error.message || "Can not send email.", 500));
 
     }
 });
