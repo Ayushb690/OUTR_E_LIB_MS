@@ -22,7 +22,7 @@ const SettingPopup = () => {
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 p-5 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 p-5 flex items-center justify-center z-50">
       <div className="w-full bg-white rounded-lg shadow-lg sm:w-auto lg:w-1/2 2xl:w-1/3">
         <div className="p-6">
           <header className="flex justify-between items-center mb-7 pb-5 border-b-[1px] border-black">
@@ -38,51 +38,84 @@ const SettingPopup = () => {
               onClick={() => dispatch(toggleSettingPopup())} />
           </header>
 
-          <form onSubmit={handleUpdatePassword}>
+          <form onSubmit={handleUpdatePassword} className="mt-8">
 
+            <div className="space-y-6">
 
-            <div className="mb-4 sm:flex gap-4  items=center">
-              <label className="block text-gray-800 font-medium w-full">Enter Current Password</label>
-              <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} placeholder="Current Password"
-                className="w-full px-4 py-2 border border-gray-400 rounded-md" />
-            </div>
-            <div className="mb-4 sm:flex gap-4  items=center">
-              <label className="block text-gray-800 font-medium">Enter New Password</label>
-              <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="Enter New Password"
-                className="w-full px-4 py-2 border border-gray-400 rounded-md" />
-            </div>
-            <div className="mb-4 sm:flex gap-4  items=center">
-              <label className="block text-gray-800 font-medium">Confirm New Password</label>
-              <input type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} placeholder="Confirm New Password"
-                className="w-full px-4 py-2 border border-gray-400 rounded-md" />
-            </div>
-            <div className="flex justify-end sapce-x-4">
-              {/* <button type="button"
-                onClick={() => dispatch(toggleAddNewAdminPopup())}
-                className="px-4 py-8 bg-gray-300 rounded-md hover:bg-gray-600">
-                Close
-              </button>
-              <button type="submit"
-                disabled={loading} 
-                onClick={() => dispatch(toggleAddNewAdminPopup())}
-                className="px-4 py-8 bg-black rounded-md text-white hover:bg-slate-200">
-                Add
-              </button> */}
-              {/* Buttons */}
-              <div className="flex gap-4 mt-10">
-                <button type="button"
-                  onClick={() => dispatch(toggleSettingPopup())}
-                  className="px-4 py-8 bg-gray-300 rounded-md hover:bg-gray-600">
-                  CANCEL
-                </button>
-                <button type="submit"
-                  disabled={loading}
-                  className="px-4 py-8 bg-black rounded-md text-white hover:bg-slate-200">
-                  CONFIRM
-                </button>
+              {/* Current Password */}
+              <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] items-center gap-4">
+                <label className="font-medium text-gray-800">
+                  Current Password
+                </label>
 
+                <input
+                  type="password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  placeholder="Enter current password"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3
+        outline-none focus:border-black focus:ring-1 focus:ring-black
+        transition"
+                />
               </div>
+
+              {/* New Password */}
+              <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] items-center gap-4">
+                <label className="font-medium text-gray-800">
+                  New Password
+                </label>
+
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Enter new password"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3
+        outline-none focus:border-black focus:ring-1 focus:ring-black
+        transition"
+                />
+              </div>
+
+              {/* Confirm Password */}
+              <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] items-center gap-4">
+                <label className="font-medium text-gray-800">
+                  Confirm Password
+                </label>
+
+                <input
+                  type="password"
+                  value={confirmNewPassword}
+                  onChange={(e) => setConfirmNewPassword(e.target.value)}
+                  placeholder="Confirm new password"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3
+        outline-none focus:border-black focus:ring-1 focus:ring-black
+        transition"
+                />
+              </div>
+
+            </div>
+
+            {/* Buttons */}
+            <div className="mt-10 flex justify-end gap-4">
+
+              <button
+                type="button"
+                onClick={() => dispatch(toggleSettingPopup())}
+                className="rounded-lg bg-gray-200 px-8 py-3 font-medium
+      transition hover:bg-gray-300"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="rounded-lg bg-black px-8 py-3 font-medium text-white
+      transition hover:bg-gray-800 disabled:opacity-60"
+              >
+                {loading ? "Updating..." : "Confirm"}
+              </button>
+
             </div>
 
           </form>

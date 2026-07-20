@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import adminIcon from "../assets/pointing.png";
 import usersIcon from "../assets/people-black.png";
 import bookIcon from "../assets/book-square.png";
+import bookstack from "../assets/bookstack.png";
 import { Pie } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -89,107 +90,199 @@ const AdminDashboard = () => {
     ],
   };
 
-  return <>
-    <main className="relative flex-col flex-1 p-6 pt-28">
-      <Header />
-      <div className="flex flex-col-reverse x1:flex-row">
-        {/* LEFT SIDE */}
-        <div className="flex-[2] flex-col gap-7 lg:flex-row flex lg:items-center xl:flex-col justify-between 
-        x1:gap-20 py-5">
-          <div className="xl:flex-[4] flex items-end w-full content-center">
-            <Pie
-              data={data}
-              options={{ cutout: 0 }}
-              className="mx-auto lg:mx-0 w-full h-auto"
-            />
-          </div>
-          <div className="flex items-center p-8 w-full sm:w-[400px] xl:w-fit mr-5 xl:p-3 2xl:p-6 gap-5 h-fit
-            xl:min-h-[150px] bg-white xl:flex-1 rounded-lg">
-            <img src={logo} alt="logo" className="w-auto x1:flex-1 rounded-lg" />
-            <span className="w-[2px] bg-black h-full"></span>
-            <div className="flex flex-col gap-3" >
-              <p className="flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full bg-[#424d4d]"></span>
-                <span>Total Borrowed Books</span>
-              </p>
-              <p className="flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full bg-[#525b76]"></span>
-                <span>Total Returned Books</span>
-              </p>
+  return (
+    <>
+      <main className="relative flex-1 p-6 pt-28 bg-gray-100 min-h-screen">
+        <Header />
 
-            </div>
-          </div>
-        </div>
-        {/* RIGHT SIDE */}
-        <div className="flex flex-[4] flex-col gap-7 lg:gap-16 lg:px-7 lg:py-5 justify-between xl:min-h-[85.5vh]">
-          <div className="flex flex-col-reverse lg:flex-row gap-7 flex-[4]">
-            <div className="flex flex-col gap-7 flex-1">
-              <div className="flex items-center gap-3 bg-white p-5 max-h-[120px] overflow-y-hidden
-                rounded-lg transition hover:shadow-inner duration-300 w-full lg:max-w-[360px]">
-                <span className="bg-gray-300 h-20 min-w-20 flex justify-center items-center rounded-lg">
-                  <img src={usersIcon} alt="users-icon" className="w-8 h-8" />
-                </span>
-                < span className="w-[2px] bg-black h-20 lg:h-full"></span>
-                <div className="flex flex-col items-center gap-2">
-                  <h4 className="font-black text-3xl">{totalUsers}</h4>
-                  <p className="font-light text-gray-600 text-sm">Total User Base</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 bg-white p-5 max-h-[120px] overflow-y-hidden
-                rounded-lg transition hover:shadow-inner duration-300 w-full lg:max-w-[360px]">
-                <span className="bg-gray-300 h-20 min-w-20 flex justify-center items-center rounded-lg">
-                  <img src={bookIcon} alt="book-icon" className="w-8 h-8" />
-                </span>
-                < span className="w-[2px] bg-black h-20 lg:h-full"></span>
-                <div className="flex flex-col items-center gap-2">
-                  <h4 className="font-black text-3xl">{totalBooks}</h4>
-                  <p className="font-light text-gray-600 text-sm">
-                    Total Book Count</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 bg-white p-5 max-h-[120px] overflow-y-hidden
-                rounded-lg transition hover:shadow-inner duration-300 w-full lg:max-w-[360px]">
-                <span className="bg-gray-300 h-20 min-w-20 flex justify-center items-center rounded-lg">
-                  <img src={adminIcon} alt="admin-icon" className="w-8 h-8" />                </span>
-                < span className="w-[2px] bg-black h-20 lg:h-full"></span>
-                <div className="flex flex-col items-center gap-2">
-                  <h4 className="font-black text-3xl">{totalAdmin}</h4>
-                  <p className="font-light text-gray-600 text-sm">
-                    Total Admin Count</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col lg:flex-row flex-1">
-              <div className="flex flex-col lg:flex-row flex-1 items-center justify-center">
-                <div className="bg-white p-5 rounded-lg shadow-lg h-full flex flex-col justify-center
-              items-center gap-4">
-                  <img
-                    src={user && user.avatar?.url}
-                    alt="avatar"
-                    className="rounded-full w-32 h-32 object-cover"
+        <div className="grid grid-cols-1 xl:grid-cols-[360px_1fr] gap-8">
+
+          {/* ================= LEFT PANEL ================= */}
+          <div className="flex flex-col gap-6">
+
+            {/* Pie Chart */}
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h2 className="text-lg font-semibold mb-4">
+                Borrow Statistics
+              </h2>
+
+              <div className="flex justify-center">
+                <div className="w-64 h-64">
+                  <Pie
+                    data={data}
+                    options={{
+                      cutout: "60%",
+                      maintainAspectRatio: true,
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                    }}
                   />
-                  <h2 className="text-xl 2xl:text-2xl font-semibold text-center">
-                    {user && user.name}
-                  </h2>
-                  <p className="text-gray-600 text-sm 2xl:text-base text-center">
-                    Welcome to your admin dashboard. Here you can manage all the
-                    settings and monitor the statistics.|
-                  </p>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="hidden xl:flex bg-white p-7 text-lg sm:text-xl xl:text-3xl 2xl:text-4xl min-h-52
-            font-semibold relative flex-[3] justify-center items-center rounded-2xl">
-            <h4 className="overflow-y-hidden">"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde atque optio velit a sed ratione. Libero voluptatibus eligendi itaque voluptatem optio! Laborum, officia."</h4>
-            <p className="text-gray-600 text-sm sm:text-lg absolute right-[35px]
-              sm:right-[78px] bottom-[10px]">~OUTR E Library Team
-            </p>
-          </div>
-        </div>
-      </div>
 
-    </main >
-  </>;
+            {/* Legend Card */}
+            <div className="bg-white rounded-xl shadow-md p-6">
+
+              <div className="flex justify-center mb-5">
+                <img
+                  src={bookstack}
+                  alt="Book Stack"
+                  className="w-28 object-contain"
+                />
+              </div>
+
+              <div className="space-y-4">
+
+                <div className="flex items-center gap-3">
+                  <span className="w-4 h-4 rounded-full bg-[#424d4d]"></span>
+                  <span>Total Borrowed Books</span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <span className="w-4 h-4 rounded-full bg-[#525b76]"></span>
+                  <span>Total Returned Books</span>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          {/* ================= RIGHT PANEL ================= */}
+          <div className="flex flex-col gap-8">
+
+            {/* Top Section */}
+            <div className="grid lg:grid-cols-[360px_1fr] gap-8">
+
+              {/* Statistics Cards */}
+              <div className="space-y-5">
+
+                {/* Users */}
+                <div className="bg-white rounded-xl shadow-md h-[120px] flex items-center p-5 gap-5 transition hover:shadow-lg">
+
+                  <div className="bg-gray-200 w-20 h-20 rounded-xl flex justify-center items-center">
+                    <img
+                      src={usersIcon}
+                      alt="Users"
+                      className="w-8"
+                    />
+                  </div>
+
+                  <div className="w-[2px] h-16 bg-black"></div>
+
+                  <div>
+                    <h2 className="text-3xl font-bold">
+                      {totalUsers}
+                    </h2>
+
+                    <p className="text-gray-500">
+                      Total Users
+                    </p>
+                  </div>
+
+                </div>
+
+                {/* Books */}
+                <div className="bg-white rounded-xl shadow-md h-[120px] flex items-center p-5 gap-5 transition hover:shadow-lg">
+
+                  <div className="bg-gray-200 w-20 h-20 rounded-xl flex justify-center items-center">
+                    <img
+                      src={bookIcon}
+                      alt="Books"
+                      className="w-8"
+                    />
+                  </div>
+
+                  <div className="w-[2px] h-16 bg-black"></div>
+
+                  <div>
+                    <h2 className="text-3xl font-bold">
+                      {totalBooks}
+                    </h2>
+
+                    <p className="text-gray-500">
+                      Total Books
+                    </p>
+                  </div>
+
+                </div>
+
+                {/* Admins */}
+                <div className="bg-white rounded-xl shadow-md h-[120px] flex items-center p-5 gap-5 transition hover:shadow-lg">
+
+                  <div className="bg-gray-200 w-20 h-20 rounded-xl flex justify-center items-center">
+                    <img
+                      src={adminIcon}
+                      alt="Admins"
+                      className="w-8"
+                    />
+                  </div>
+
+                  <div className="w-[2px] h-16 bg-black"></div>
+
+                  <div>
+                    <h2 className="text-3xl font-bold">
+                      {totalAdmin}
+                    </h2>
+
+                    <p className="text-gray-500">
+                      Total Admins
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* Profile Card */}
+              <div className="bg-white rounded-xl shadow-md p-8 flex flex-col justify-center items-center text-center">
+
+                <img
+                  src={user?.avatar?.url}
+                  alt="Avatar"
+                  className="w-36 h-36 rounded-full object-cover border-4 border-gray-200"
+                />
+
+                <h2 className="text-2xl font-bold mt-5">
+                  {user?.name}
+                </h2>
+
+                <p className="text-gray-500">
+                  {user?.role}
+                </p>
+
+                <p className="text-gray-600 mt-5 max-w-md leading-7">
+                  Welcome to your admin dashboard. Here you can manage all the settings and monitor the statistics.
+                </p>
+
+              </div>
+
+            </div>
+
+            {/* Bottom Quote Card */}
+            <div className="hidden xl:flex bg-white rounded-xl shadow-md p-10 min-h-[220px] relative flex-col justify-center">
+
+              <h2 className="text-2xl font-semibold leading-relaxed text-gray-800">
+                "A library is not a luxury but one of the necessities of life.
+                Knowledge grows when it is shared, and every book borrowed is a
+                step toward a brighter future."
+              </h2>
+
+              <p className="absolute bottom-8 right-10 text-gray-500 text-lg">
+                ~ OUTR E-Library Team
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+      </main>
+    </>
+  );
 };
 export default AdminDashboard;
