@@ -87,7 +87,7 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
                 onClick={() => dispatch(toggleAddNewAdminPopup())}
               >
                 <RiAdminFill />
-                <span className="w-6 h-6">Add new Admin</span>
+                <span className="w-50 h-6">Add new Admin</span>
               </button>
             </>
           )}

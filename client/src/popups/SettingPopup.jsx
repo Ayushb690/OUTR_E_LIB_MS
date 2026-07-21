@@ -54,7 +54,7 @@ const SettingPopup = () => {
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="Enter current password"
                   className="w-full rounded-lg border border-gray-300 px-4 py-3
-        outline-none focus:border-black focus:ring-1 focus:ring-black
+        outline-none hover:border-black  hover:ring-black
         transition"
                 />
               </div>
@@ -71,7 +71,7 @@ const SettingPopup = () => {
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Enter new password"
                   className="w-full rounded-lg border border-gray-300 px-4 py-3
-        outline-none focus:border-black focus:ring-1 focus:ring-black
+        outline-none hover:border-black  hover:ring-black
         transition"
                 />
               </div>
@@ -88,7 +88,7 @@ const SettingPopup = () => {
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
                   placeholder="Confirm new password"
                   className="w-full rounded-lg border border-gray-300 px-4 py-3
-        outline-none focus:border-black focus:ring-1 focus:ring-black
+        outline-none hover:border-black  hover:ring-black
         transition"
                 />
               </div>

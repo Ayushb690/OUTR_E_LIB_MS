@@ -80,8 +80,8 @@ const BookManagement = () => {
             {
               isAuthenticated && user?.role === "Admin" && (
                 <button onClick={() => dispatch(toggleAddBookPopup())}
-                  className=" relative pl-14  w-fullsm:w-52 flex gap-4 justify-center
-                items-center py-2 px-4 text-white rounded-md hover:bg-slate-500">
+                  className=" relative pl-14  w-full sm:w-52 flex gap-4 justify-center
+                items-center py-2 px-4 text-black rounded-md bg-slate-500 hover:text-white hover:bg-black transition-all">
                   <span className="bg-white flex justify-center items-center overflow-hidden rounded-full
                    text-black w-[25px] h-[25px] text-[27px] absolute left-5">
                     +
@@ -127,7 +127,7 @@ const BookManagement = () => {
                     {isAuthenticated && user?.role === "Admin" && (
                       <td className="px-4 py-2">{book.quantity}</td>
                     )}
-                    <td className="px-4 py-2">{`$${book.price}`}</td>
+                    <td className="px-4 py-2">{`₹${book.price}`}</td>
                     <td className="px-4 py-2">
                       {book.availability ? "Available" : "Unavailable"}
                     </td>

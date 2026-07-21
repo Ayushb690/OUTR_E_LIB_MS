@@ -3,6 +3,7 @@ import adminIcon from "../assets/pointing.png";
 import usersIcon from "../assets/people-black.png";
 import bookIcon from "../assets/book-square.png";
 import bookstack from "../assets/bookstack.png";
+import avatar_image from "../assets/avatar_image.jpeg";
 import { Pie } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -97,7 +98,7 @@ const AdminDashboard = () => {
 
         <div className="grid grid-cols-1 xl:grid-cols-[360px_1fr] gap-8">
 
-          {/* ================= LEFT PANEL ================= */}
+          {/* LEFT side */}
           <div className="flex flex-col gap-6">
 
             {/* Pie Chart */}
@@ -143,7 +144,7 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="w-4 h-4 rounded-full bg-[#525b76]"></span>
+                  <span className="w-4 h-4 rounded-full bg-[#3e58a6]"></span>
                   <span>Total Returned Books</span>
                 </div>
 
@@ -242,7 +243,7 @@ const AdminDashboard = () => {
               <div className="bg-white rounded-xl shadow-md p-8 flex flex-col justify-center items-center text-center">
 
                 <img
-                  src={user?.avatar?.url}
+                  src={avatar_image}
                   alt="Avatar"
                   className="w-36 h-36 rounded-full object-cover border-4 border-gray-200"
                 />
