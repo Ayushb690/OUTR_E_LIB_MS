@@ -4,6 +4,7 @@ import {
     isAuthenticated,
     isAuthorized,
 } from "../middlewares/authMiddleware.js";
+import { User } from "../models/userModel.js"
 
 const router = express.Router();
 
