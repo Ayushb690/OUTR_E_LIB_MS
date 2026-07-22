@@ -18,7 +18,7 @@ import SettingPopup from "../popups/SettingPopup";
 
 const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
   const dispatch = useDispatch();
-  const { addNewAdminPopup ,settingPopup} = useSelector((state) => state.popup);
+  const { addNewAdminPopup, settingPopup } = useSelector((state) => state.popup);
   const { loading, error, message, user, isAuthenticated } = useSelector(
     (state) => state.auth
   );
@@ -84,7 +84,12 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
               </button>
               <button
                 className="w-full py-2 font-medium bg-transparent rounded-md hover:cursor-pointer flex items-center space-x-2 "
-                onClick={() => dispatch(toggleAddNewAdminPopup())}
+                onClick={() => {
+                  // alert("Button clicked");
+                  // console.log("Button clicked");
+                  dispatch(toggleAddNewAdminPopup());
+                }
+                }
               >
                 <RiAdminFill />
                 <span className="w-50 h-6">Add new Admin</span>
@@ -95,7 +100,11 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
             <>
               <button
                 className="md:hidden w-full py-2 font-medium bg-transparent rounded-md hover:cursor-pointer flex items-center space-x-2 "
-                onClick={() => dispatch(toggleSettingPopup())}
+
+                onClick={() => {
+                  dispatch(toggleSettingPopup());
+                }
+                }
               >
                 <img src={catalogIcon} alt="icon" />
                 <span>My Borrowed Books</span>
@@ -124,8 +133,9 @@ const SideBar = ({ isSideBarOpen, setIsSideBarOpen, setSelectedComponent }) => {
           onClick={() => setIsSideBarOpen(!isSideBarOpen)}
           className=" h-fit w-fit absolute top-0 right-4 mt-4 block md:hidden cursor-pointer"
         />
-      </aside>
-      {addNewAdminPopup && <addNewAdmin />}
+      </aside >
+      {addNewAdminPopup && <AddNewAdmin />
+      }
       {settingPopup && <SettingPopup />}
     </>
   );

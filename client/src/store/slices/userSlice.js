@@ -15,7 +15,7 @@ const userSlice = createSlice({
             state.loading = true;
         },
         fetchAllUsersSuccess(state, action) {
-            state.loading = true;
+            state.loading = false;
             state.users = action.payload;
         },
         fetchAllUsersFailed(state) {
@@ -72,6 +72,7 @@ export const addNewAdmin = (data) => async (dispatch) => {
         .then((res) => {
             dispatch(userSlice.actions.addNewAdminSuccess());
             toast.success(res.data.message);
+            dispatch(fetchAllUsers());           // Refresh list
             dispatch(toggleAddNewAdminPopup());
         })
         .catch((err) => {

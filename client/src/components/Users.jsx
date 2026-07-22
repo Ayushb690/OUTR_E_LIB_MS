@@ -43,7 +43,7 @@ rounded-md shadow-lg">
                   <th className="px-4 py-2 text-left">Role</th>
                   <th className="px-4 py-2 text-center">No. of Books Borrowed</th>
                   <th className="px-4 py-2 text-center">Registered On</th>
-                  I</tr>
+                </tr>
               </thead>
               <tbody>
                 {
@@ -59,7 +59,6 @@ rounded-md shadow-lg">
                           {user?.borrowedBooks?.length || 0}
                         </td>
                         <td className="px-4 py-2">{formatDate(user.createdAt)}</td>
-
                       </tr>
                     )
                   )
